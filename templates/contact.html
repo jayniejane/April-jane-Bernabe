@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Area Calculators</h1>
+    
+    <div class="card" style="margin-top: 1.5rem;">
+        <h3>Area of Circle</h3>
+        <form method="POST">
+            <input type="hidden" name="calc_type" value="circle">
+            <label>Radius:</label><br>
+            <input type="number" step="any" name="radius" required><br><br>
+            <button type="submit">Calculate Circle Area</button>
+        </form>
+        {% if circle_area is not none %}
+            <p style="margin-top: 1rem; color: #4ade80;">Result Area: <strong>{{ circle_area }}</strong></p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h3>Area of Triangle</h3>
+        <form method="POST">
+            <input type="hidden" name="calc_type" value="triangle">
+            <label>Base:</label><br>
+            <input type="number" step="any" name="base" required><br>
+            <label>Height:</label><br>
+            <input type="number" step="any" name="height" required><br><br>
+            <button type="submit">Calculate Triangle Area</button>
+        </form>
+        {% if triangle_area is not none %}
+            <p style="margin-top: 1rem; color: #4ade80;">Result Area: <strong>{{ triangle_area }}</strong></p>
+        {% endif %}
+    </div>
+{% endblock %}
