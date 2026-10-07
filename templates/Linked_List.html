@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Linked List Manager</h1>
+
+    <div class="card" style="margin-top: 1.5rem;">
+        <form method="POST" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+            <div>
+                <label>Node Value:</label><br>
+                <input type="text" name="value" placeholder="Enter text/number">
+            </div>
+            <button type="submit" name="action" value="append">Append Node</button>
+            <button type="submit" name="action" value="pop" class="btn-danger">Pop Node</button>
+        </form>
+
+        <h3 style="margin-top: 2rem;">Current Linked List View:</h3>
+        <div class="ll-container">
+            {% if items %}
+                {% for item in items %}
+                    <div class="ll-node">{{ item }}</div>
+                    {% if not loop.last %}
+                        <span class="ll-arrow">➔</span>
+                    {% endif %}
+                {% endfor %}
+                <span class="ll-arrow">➔ NULL</span>
+            {% else %}
+                <p style="color: #94a3b8;">List is empty (HEAD -> NULL)</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
