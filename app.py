@@ -56,10 +56,6 @@ def home():
 def profile():
     return render_template('profile.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
 @app.route('/area', methods=['GET', 'POST'])
 def area():
     circle_area = None
@@ -91,8 +87,8 @@ def linked_list():
         return redirect(url_for('linked_list'))
 
     items = linked_list_store.to_list()
-    return render_template('linked_list.html', items=items)
+    # Pinalitan mula 'linked_list.html' patungong 'Linked_List.html' para mag-match sa file mo sa templates/ folder!
+    return render_template('Linked_List.html', items=items)
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
