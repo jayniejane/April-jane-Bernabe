@@ -12,13 +12,16 @@
         <ul class="nav-links">
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('area') }}">Area Calculators</a></li>
+            <li><a href="{{ url_for('area') }}">Area Calculator</a></li>
             <li><a href="{{ url_for('linked_list') }}">Linked List UI</a></li>
         </ul>
     </nav>
 
     <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>er">
         {% block content %}{% endblock %}
     </main>
 </body>
