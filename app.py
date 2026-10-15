@@ -1,5 +1,6 @@
 import math
 from flask import Flask, render_template, request, redirect, url_for
+from stack import Stack  # <-- Import your Stack class from stack.py
 
 app = Flask(__name__)
 
@@ -45,8 +46,9 @@ class LinkedList:
             curr = curr.next
         return result
 
-# Single instance para sa session
+# Single instances para sa session
 linked_list_store = LinkedList()
+stack_store = Stack()  # <-- Initialize your Stack store here!
 
 @app.route('/')
 def home():
@@ -87,8 +89,27 @@ def linked_list():
         return redirect(url_for('linked_list'))
 
     items = linked_list_store.to_list()
-    # Pinalitan mula 'linked_list.html' patungong 'Linked_List.html' para mag-match sa file mo sa templates/ folder!
     return render_template('Linked_List.html', items=items)
+
+
+# --- NEW: Stack Routes ---
+@app.route('/stack', methods=['GET', 'POST'])
+def stack_view():
+    if request.method == 'POST':
+        action = request.form.get('action')
+        data = request.form.get('value')
+        
+        if action == 'push' and data:
+            stack_store.push(data)
+        elif action == 'pop':
+            stack_store.pop()
+            
+        return redirect(url_for('stack_view'))
+
+    stack_elements = stack_store.to_list()
+    top_element = stack_store.peek()
+    return render_template('stack.html', stack=stack_elements, top=top_element)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
