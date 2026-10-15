@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stack Visualizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f7f6; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .stack-container { display: flex; flex-direction: column; align-items: center; margin: 20px 0; min-height: 200px; border: 2px dashed #ccc; padding: 15px; border-radius: 6px; justify-content: flex-start; }
+        .stack-item { background: #3498db; color: white; padding: 10px 20px; margin: 5px 0; width: 60%; text-align: center; border-radius: 4px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .stack-item:first-child { background: #e74c3c; } /* Highlight Top element */
+        .empty-msg { color: #888; margin-top: 80px; }
+        form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input[type="text"] { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-push { background: #2ecc71; color: white; }
+        .btn-pop { background: #e74c3c; color: white; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Stack Visualizer (LIFO)</h2>
+    
+    <!-- Push Form -->
+    <form action="/push" method="POST">
+        <input type="text" name="value" placeholder="Enter value..." required autocomplete="off">
+        <button type="submit" class="btn-push">Push</button>
+    </form>
+
+    <!-- Pop Form -->
+    <form action="/pop" method="POST">
+        <button type="submit" class="btn-pop">Pop (Remove Top)</button>
+    </form>
+
+    <h3>Stack Elements (Top to Bottom):</h3>
+    <div class="stack-container">
+        {% if stack %}
+            {% for item in stack %}
+                <div class="stack-item">
+                    {{ item }} {% if loop.first %} (TOP){% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-msg">Stack is empty</div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
